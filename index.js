@@ -4,7 +4,6 @@ const dotenv = require('dotenv').config();
 const PORT = process.env.PORT;
 require('./conexion/conexion');
 const Usuario = require('./model/userModel');
-const path = require('path');
 const app = express();
 
 
