@@ -1,4 +1,5 @@
 
+
 const express = require('express');
 const cors = require('cors');
 const dotenv = require( 'dotenv').config();
@@ -46,10 +47,30 @@ app.get('/clientes', async (req, res) =>{
         console.log(personas);
         res.json({ 
           personas
-        }
-        )
+        })
+})
+
+/* Eliminamos los datos de clientes */
+
+app.delete('/clientes/:id', async (req, res)=>{
+    const id = req.params.id;
+    console.log(id);
+
+    try {
+        const deleteUser = await Usuario.findByIdAndDelete(id);
+         console.log(deleteUser);
+         if(!deleteUser){
+            return res.status(404).send();
+         }else{
+            console.log('Cliente Eliminado');
+            return res.status(200).send();
+         }
+    }catch(error){
+
+    }
 })
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el Puerto ${PORT}`);
 })
+
